@@ -1,0 +1,63 @@
+version: "3.9"
+services:
+  nifi:
+    image: apache/nifi:latest
+    container_name: mynifi_industry
+    restart: on-failure
+    ports:
+    # HTTPS
+      - "8443:8443"
+    environment:
+      - SINGLE_USER_CREDENTIALS_USERNAME=admin
+      - SINGLE_USER_CREDENTIALS_PASSWORD=tsBtRBKHRAx69EqUghvvgEvjnaLjFEB
+  mosquitto:
+    image: eclipse-mosquitto
+    hostname: mosquitto
+    container_name: mymosquitto_industry
+    networks:
+        - default
+    expose:
+        - "1883"
+        - "9001"
+    ports:
+        - "1883:1883"
+        - "9001:9001"
+    volumes:
+        - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+        - /mosquitto/data
+        - /mosquitto/log
+ 
+  database:
+      image: postgres:15.1
+      restart: always
+      environment:
+        - POSTGRES_DB=industry
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+      logging:
+        options:
+          max-size: 10m
+          max-file: "3"
+      ports:
+        - '5437:5432'
+      volumes: 
+        - ./postgres-data:/var/lib/postgresql/data
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: mygrafana_industry
+    restart: unless-stopped
+    ports:
+     - '3000:3000'
+volumes:
+  pgdata:
+

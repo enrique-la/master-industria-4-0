@@ -1,0 +1,53 @@
+# Entornos virtuales
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Credenciales y configuración sensible
+.env
+*.env
+secrets.*
+credentials.*
+mosquitto.conf
+
+# Archivos compilados Arduino
+*.hex
+*.elf
+build/
+
+# Modelos ML
+*.pkl
+*.pt
+*.h5
+
+# Archivos comprimidos grandes
+*.zip
+*.tar
+*.gz
+
+# Docker volumes
+docker_temp/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+
+# Archivos de video grandes
+*.mp4
+*.avi
+*.mov
