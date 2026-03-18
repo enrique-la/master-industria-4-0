@@ -51,3 +51,8 @@ desktop.ini
 *.mp4
 *.avi
 *.mov
+
+# Diapositivas y presentaciones
+*.pptx
+*.ppt
+*.pptm
